@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+       <script type="text/javascript">
+
+var myChart = echarts.init(document.getElementById('container'));
+var app = {};
+option=null;
+$.get('data2.json').done(function (data) {
+    console.log(data.buyer.buyer_ID);
+    myChart.setOption({
+    title: {
+        text: '业务流程展示'
+    },
+    //提示框
+    tooltip: 
+    { 
+    	trigger: 'item',
+		formatter: '{b0}: {c0}<br />{b1}: {c1}'
+    },
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+
+    series : [
+
+        {　　
+            name:"otherGraphNode",
+            type: 'graph',
+            layout: 'none',
+            symbolSize: 50,
+            roam: true,//鼠标缩放和漫游平移
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+            edgeSymbol: ['arrow', 'arrow'],
+            edgeSymbolSize: [10, 10],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 20
+                    }
+                }
+            },
+            data: [{
+                name: '采购合同',
+                x: 300,
+                y: 300
+            }, {
+                name: '节点2',
+                x: 800,
+                y: 300
+            }, {
+                name: '节点3',
+                x: 550,
+                y: 100
+            }, {
+                name: '采购订单',
+                x: 550,
+                y: 500
+            }, {
+            	category:1,
+                name: '发货单',
+                x: 800,
+                y: 500
+                
+            }, {
+                category:1,
+                name: '采购合同属性',
+                x: 300,
+                y: 1000,
+                symbolSize: 100,
+                symbol:'rect',
+                label:{
+                    normal:{
+                        show:true,
+                        formatter: [
+
+                            data.sales_contract[0].ID,
+                            'Text fregments can be customized.'
+                        ].join('\n')
+                    }
+                },
+                tooltip:{
+                        trigger: 'item',
+                        formatter:data.sales_contract[0].time
+                    }
+
+            }],
+            // links: [],
+            links: [ {
+                source: '采购合同',
+                target: '节点3'
+            }, {
+                source: '节点2',
+                target: '节点3'
+            }, {
+                source: '节点2',
+                target: '采购订单'
+            }, {
+                source: '采购合同',
+                target: '采购订单'
+            }, {
+                source: '采购订单',
+                target: '发货单'
+            }, {
+                source: '采购合同',
+                target: '采购合同属性',
+                edgeSymbol:['arrow','circle']
+            }],
+            lineStyle: {
+                normal: {
+                    opacity: 0.9,
+                    width: 2,
+                    curveness: 0
+                }
+            },
+              categories:[
+    		{
+    	      name: '类',
+
+    		},
+    		{
+    			name:'属性',  
+    			symbol: 'rect'		
+    		}]//categories
+        }
+    ]//series
+});
+});
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+   </body>
+</html>

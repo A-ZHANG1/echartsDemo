@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+       <script type="text/javascript">
+
+var myChart = echarts.init(document.getElementById('container'));
+
+// 初始 option
+option = {
+    title: {
+        text: '异步数据加载示例'
+    },
+    tooltip: {},
+    legend: {
+        data:['销量']
+    },
+    xAxis: {
+        data: []
+    },
+    yAxis: {},
+    series: [{
+        name: '销量',
+        type: 'bar',
+        data: []
+    }]
+};
+
+$.get('data.json').done(function (data) {
+//  data=JSON.parse(data);//读入的就是json数组所以这一句不要写，否则报错json o at position 1
+  console.log(data.name);
+    myChart.setOption({
+       xAxis: {
+            data: data.name
+        },
+        series: [{
+            // 根据名字对应到相应的系列
+            name: '销量',
+            data: data.value
+        }]
+    });
+});
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+                    
+       </script>
+   </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "transitionID":"2",
+  "buyer":{
+    "buyer_ID":"buyerNO1",
+    "buyer_name":"microsoft_metal"
+  },
+  "sales_contract":[
+{
+      "ID":1,
+      "name":"sales_contract_1",
+      "time":"2020-06-03",
+      "x":"900",
+      "y":"800"
+    },
+    {
+      "ID":"2",
+      "name":"sales_contract_2",
+      "time":"2020-06-04",
+       "x":"600",
+      "y":"800"
+    }
+  ]
+}
