@@ -20,45 +20,126 @@
     <div id="main" style="width: 600px;height:400px;"></div>
     <script type="text/javascript">              
 
-        var myChart = echarts.init(document.getElementById('main'));
+var myChart = echarts.init(document.getElementById('main'));
+// var processData={
+//           "sales_contract":[
+//     {
+//       name:"sales_contract_1",
+//       value:[200,100],
+//       time:"2020",
+//       seller:"Microsemi"
+//     },
+//     {    
+//        name:"sales_contract_2",
+//        value:[200,300],
+//        time:"2021",
+//        seller:"GiganticSemi"     
+//     }]
+//   }
+
         option=null;
-        $.get('data2.json').done(function(data){
+
+
+        $.get('data1.json').done(function(data){
 
          console.log(data.buyer.buyer_ID);
+        
+        
+//           var end_obj=[];
+//           for(var i in processData.sales_contract){
+//              var obj = {name:'',datas: []};
+//              obj.name=processData.sales_contract[i].name;
+//              obj.datas[0] = processData.sales_contract[i]['time'];
 
+//              obj.datas[1] = processData.sales_contract[i]['seller'];
+//              end_obj.push(obj);
+//           }
+          
+// console.log(end_obj[0].name);
 
           myChart.setOption({
-            title: {
-        text: '业务流程展示'
-    },
+
+            geo:{
+              map:'北京'
+            },
+            title: {  
+              text: '业务流程展示'
+          },
     //提示框
     tooltip: 
     { 
       trigger: 'item',
-      formatter: '{b0}: {c0}<br />{b1}: {c1}'
+      formatter: '{b0}: {c0}</br>{b1}: {c1}'
     },
 
             series:[
             {
-              name:"sales_contract_set",
+            name:"transitionFlow",
+            type: 'graph',
+            draggable:"true",
+            roam: true,
+            coordinateSystem: 'geo',
+            symbolSize: 50,
+           
+            label: {
+                normal: {
+                    show: true
+                }
+            },
+          data:[
+          {
+                name: '节点3',
+                value:[400,150]
+            }]
+            }
+            ,
+            {
+              name:"processData",
               type:'graph',
-              layout:'none',
+              coordinateSystem: 'geo',
+              
               symbolSize:50,
-              roam:false,
+              symbol:'rect',
+            roam: true,//鼠标缩放和漫游平移
+        
+            tooltip:{
+                show:'true',
+                        trigger: 'item',
+                        formatter:'{b}'
+                    },
               label:{
                 normal:{
                   show:true,
-                  position:'top',
-                  formatter:[
+                  formatter:function(a){
+                    console.log(a['data'].time);
+                    return "name:"+a['name']+'\n'+'time:'+a['data'].time+'\n'+'seller:'+a['data'].seller;
+                  }
 
-                            data.sales_contract[0].ID,
-                            'Text fregments can be customized.'
-                        ].join('\n')
                 }
               },
-               data:data.sales_contract,
+               data:data.sales_contract
+
             
-            }]
+            }, {
+            type: 'lines',//大数据到节点A
+            coordinateSystem: 'geo',
+                      
+            lineStyle: {
+                normal: {
+                    curveness: 0,
+                    color:'#000000',
+                    width: 1,
+                }
+            },
+            data: [
+                {
+                    coords:[
+                        [200,100],
+                        [200,300]
+                    ]
+                }
+            ]
+           }]
           });
         });
 
