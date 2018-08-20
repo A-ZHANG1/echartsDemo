@@ -1,0 +1,3 @@
+当前版本的页面在 demoV1.html里面，
+json文件格式是data.json，
+如果不想搭环境，把这两个文件放到idea一个随便什么工程的/resource/static里面就阔以跑了诶
