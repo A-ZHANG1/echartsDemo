@@ -1,4 +1,30 @@
 {
-  "ID":1,
-  "name":"contract1"
+
+  "transitionID":"2",
+  "buyer":{
+    "buyer_ID":"buyerNO1",
+    "buyer_name":"microsoft_metal"
+  },
+  "sales_contract":[
+    {
+     
+      "name":"sales_contract_1",
+      "value":[100,150],
+      "time":"2020-06-03",
+      "seller":"MicroSemi"
+     
+    },
+    {
+      
+      "name":"sales_contract_2",
+      "value":[500,650],
+      "time":"2020-06-04",
+      "seller":"GiganticSemi"    
+    }
+  ],
+  "purchase_order":[{
+    "name":"purchase_order_1",
+    "value":[550,700],
+    "time":"2020-06-05"
+  }]
 }
