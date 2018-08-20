@@ -5,26 +5,77 @@
     "buyer_ID":"buyerNO1",
     "buyer_name":"microsoft_metal"
   },
-  "sales_contract":[
+  "sales_contract":[{
+    "name":"salse_contract_1",
+    "value":[200,380],
+    "time":"2020-06-01",
+    "note":"WitSingularity"
+  }],
+  "purchase_contract":[
     {
      
-      "name":"sales_contract_1",
-      "value":[100,150],
+      "name":"purchase_contract_1",
+      "value":[400,300],
       "time":"2020-06-03",
-      "seller":"MicroSemi"
+      "buyer":"MicroSemi"
      
     },
     {
       
-      "name":"sales_contract_2",
-      "value":[500,650],
+      "name":"purchase_contract_2",
+      "value":[450,450],
       "time":"2020-06-04",
-      "seller":"GiganticSemi"    
+      "buyer":"GiganticSemi"    
     }
   ],
   "purchase_order":[{
     "name":"purchase_order_1",
-    "value":[550,700],
-    "time":"2020-06-05"
-  }]
+    "value":[600,400],
+    "time":"2020-06-09",
+    "buyer":"Goldfish.Co"
+  }],
+  "concatinate_lines":[
+    
+                {
+                    "coords":[
+                        [300,300],
+                        [400,300]
+                    ]
+                },{
+                    "coords":[
+                        [300,300],
+                        [450,450]
+                    ]
+                },{
+                    "coords":[
+                        [600,400],
+                        [550,500]
+                    ]
+                },{
+                    "coords":[
+                        [200,380],
+                        [150,100]
+                    ]
+                }
+
+  ],
+    "relationship_lines":[
+    
+                {
+                    "coords":[
+                        [600,400],
+                        [400,300]
+                    ]},{
+                    "coords":[
+                        [200,380],
+                        [400,300]
+                    ]
+                },{
+                    "coords":[
+                        [200,380],
+                        [450,450]
+                    ]
+                }
+
+  ]
 }
